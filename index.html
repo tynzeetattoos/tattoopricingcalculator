@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TynzeeTattoos</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+        }
+
+        header {
+            padding: 20px;
+        }
+
+        h1 {
+            color: #3498db;
+            margin-bottom: 20px;
+        }
+
+        p {
+            line-height: 1.6;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .calculator {
+            background-color: #2b2b2b;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+            text-align: center;
+            width: 90%;
+            margin: 30px auto;
+        }
+
+        button {
+            background-color: #3498db;
+            color: #1e1e1e;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #2980b9;
+        }
+
+        p#cost {
+            font-size: 20px;
+            color: #3498db;
+        }
+
+        .form-group {
+            margin: 20px 0;
+        }
+
+        .form-group label {
+            font-size: 16px;
+            color: #3498db;
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        .form-group select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 5px;
+            border: 1px solid #666;
+            background-color: #1e1e1e;
+            color: white;
+            font-size: 16px;
+        }
+
+        #more-info {
+            display: none;
+            margin: 30px auto;
+            width: 90%;
+            text-align: left;
+        }
+
+        footer {
+            text-align: center;
+            padding: 20px;
+            background-color: #333;
+            color: #fff;
+        }
+
+        .show-info-btn {
+            margin-top: 20px;
+            background-color: #ffcc00;
+            color: #1e1e1e;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 18px;
+            cursor: pointer;
+        }
+
+        .show-info-btn:hover {
+            background-color: #ffb400;
+        }
+
+        /* Styling for price comparison */
+        .price-comparison {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            margin-top: 20px;
+        }
+
+        .price-box {
+            background-color: #2b2b2b;
+            padding: 20px;
+            border-radius: 10px;
+            width: 40%;
+        }
+
+        .price-box h3 {
+            margin-bottom: 10px;
+        }
+
+        .price-box p {
+            margin: 5px 0;
+            font-size: 18px;
+        }
+
+        .green {
+            color: #00ff00;
+        }
+
+        .red {
+            color: #ff4a57;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>TynzeeTattoos Price Calculator</h1>
+        <p>Get a quick estimate for your next tattoo!</p>
+    </header>
+
+    <section class="calculator">
+        <h2>Estimate Your Tattoo Cost</h2>
+        <div class="form-group">
+            <label for="size">Tattoo Size</label>
+            <select id="size">
+                <option value="small">Small (up to 2 sq. in.)</option>
+                <option value="medium">Medium (2 to 5 sq. in.)</option>
+                <option value="large">Large (5 to 12 sq. in.)</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="color">Color</label>
+            <select id="color">
+                <option value="black_grey">Black/Grey</option>
+                <option value="color">Color</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="detail">Detail Level</label>
+            <select id="detail">
+                <option value="simple">Very Simple</option>
+                <option value="medium">Medium Detail</option>
+                <option value="elaborate">Extremely Elaborate</option>
+            </select>
+        </div>
+
+        <button onclick="calculate()">Calculate Cost</button>
+    </section>
+
+    <div class="price-comparison">
+        <div class="price-box" id="tynzee-price">
+            <h3>TynzeeTattoos</h3>
+            <p id="tynzee-cost" class="green">Estimated Cost: $0.00</p>
+            <p class="green">✔ Free Touchups for Life</p>
+            <p class="green">✔ Flexible Pricing</p>
+            <p class="green">✔ Kid-Friendly</p>
+            <p class="green">✔ Clean, Sterile Environment</p>
+        </div>
+
+        <div class="price-box" id="competitor-price">
+            <h3>Competitor</h3>
+            <p id="competitor-cost" class="red">Estimated Cost: $0.00</p>
+            <p class="red">✖ No Free Touchups</p>
+            <p class="red">✖ Rigid Pricing</p>
+            <p class="red">✖ Not Kid-Friendly</p>
+            <p class="red">✖ Standard Cleanliness</p>
+        </div>
+    </div>
+
+    <div>
+        <button class="show-info-btn" onclick="toggleMoreInfo()">View More Information</button>
+    </div>
+
+    <div id="more-info">
+        <section>
+            <h2>Why Choose TynzeeTattoos?</h2>
+            <p>At <strong>TynzeeTattoos</strong>, we’re committed to providing more than just a tattoo. Here’s what sets us apart:</p>
+            <ul>
+                <li><strong>Flexible Communication:</strong> I'm always open to your ideas, adjustments, and scheduling needs.</li>
+                <li><strong>Referral Rewards:</strong> Bring a friend and enjoy discounts. Loyalty matters!</li>
+                <li><strong>Free Touchups for Life:</strong> I offer lifetime touchups with proper aftercare—no hidden fees.</li>
+                <li><strong>Competitive Pricing:</strong> Quality tattoos at fair prices with flexible payment options, including trades.</li>
+                <li><strong>Trades Welcome:</strong> Have a product, skill, or service? Let's barter for ink!</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Average Tattoo Prices</h2>
+            <ul>
+                <li><strong>Small Tattoos:</strong> $50 to $150</li>
+                <li><strong>Medium Tattoos:</strong> $200 to $600</li>
+                <li><strong>Large Tattoos:</strong> Starting at $1,000</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Price Savings Compared to Competitors</h2>
+            <ul>
+                <li><strong>Small Tattoos:</strong> Save $50 - $100 compared to competitors.</li>
+                <li><strong>Medium Tattoos:</strong> Save $200 - $400 compared to competitors.</li>
+                <li><strong>Large Tattoos:</strong> Save $1,000 - $1,500 compared to competitors.</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Ready to Book?</h2>
+            <p>Let’s talk! Head to <strong><a href="https://tynzeetattoos.com" target="_blank">tynzeetattoos.com</a></strong> and get started on your next piece. Don’t forget to leave us a <strong>Google Review</strong> for a promotion on your next tattoo—it’s highly appreciated!</p>
+        </section>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 TynzeeTattoos - Quality Tattoos, Affordable Pricing</p>
+    </footer>
+
+    <script>
+        function calculate() {
+            const size = document.getElementById('size').value;
+            const color = document.getElementById('color').value;
+            const detail = document.getElementById('detail').value;
+
+            const hourlyRate = 60; // Artist's hourly rate
+
+            let baseTime;
+            if (size === 'small') {
+                baseTime = 1; // 1 hour for small
+            } else if (size === 'medium') {
+                baseTime = 3; // 3 hours for medium
+            } else if (size === 'large') {
+                baseTime = 5; // 5 hours for large
+            }
+
+            // Color factor (black/grey is 1, color is 1.5)
+            const colorFactor = color === 'black_grey' ? 1 : 1.5;
+            // Detail factor
+            const detailFactor = detail === 'simple' ? 1 : detail === 'medium' ? 1.5 : 2;
+
+            // Final estimated time for TynzeeTattoos
+            const estimatedTime = baseTime * colorFactor * detailFactor;
+            const tynzeeCost = estimatedTime * hourlyRate;
+
+            // Competitor cost (18% higher)
+            const competitorCost = tynzeeCost * 1.18;
+
+            // Display costs
+            document.getElementById('tynzee-cost').textContent = "Estimated Cost: $" + tynzeeCost.toFixed(2);
+            document.getElementById('competitor-cost').textContent = "Estimated Cost: $" + competitorCost.toFixed(2);
+        }
+
+        function toggleMoreInfo() {
+            const moreInfo = document.getElementById('more-info');
+            if (moreInfo.style.display === "none" || moreInfo.style.display === "") {
+                moreInfo.style.display = "block";
+                document.querySelector('.show-info-btn').textContent = "Hide Information";
+            } else {
+                moreInfo.style.display = "none";
+                document.querySelector('.show-info-btn').textContent = "View More Information";
+            }
+        }
+    </script>
+
+</body>
+</html>
